@@ -1,0 +1,30 @@
+<?php
+require_once '../model/user.php';
+
+class userController {
+
+    private userSession $userSession;
+
+    /**
+     * @param userSession $userSession
+     */
+    public function __construct()
+    {
+        $this->userSession = new userSession();
+    }
+
+    public function getUserName($userID){
+        return user::getUserNameByID($userID);
+    }
+
+    public function registerUser($username, $password, $name, $email){
+        return user::newUser($username, $password, $name, $email);
+    }
+}
+
+$field = null;
+$validation = true;
+$controller = new userController();
+if(isset($_POST["register"])){
+    require_once ("formsUser/registerUser.php");
+}
